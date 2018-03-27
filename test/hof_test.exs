@@ -23,7 +23,6 @@ defmodule HofTest do
   test "receive as many messages as many times repeat/3 is run" do
     reps = Enum.random(0..1000)
     HOF.repeat([0, 0], &send_msg_pass_same_list/2, reps)
-
     case reps do
       0 ->
         refute_receive {:ok, _}
@@ -32,7 +31,7 @@ defmodule HofTest do
     end
   end
 
-  defp send_msg_pass_same_list(a, b) do
+  defp send_msg_return_same_list(a, b) do
     send self(), {:ok, [a, b]}
     [a, b]
   end
